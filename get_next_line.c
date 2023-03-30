@@ -1,28 +1,33 @@
-//#include "get_next_line.h"
+#include "get_next_line.h"
 #include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	buffer[1];
 	char	*line;
 	int	i;
+	int	a;
 
-	// if (read (fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
-	// 	return (NULL);
-	//line = (char *)malloc(ft_strlen(buffer) + 1);
-	//if (!line)
-	//	return (NULL);
-	// while (read(fd, buffer, (BUFFER_SIZE / BUFFER_SIZE)) > 0)
-	// {	
-	while(read(fd, buffer, 1))
+	if (read (fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	i = 0;
+	line = NULL;
+	while(read(fd, buffer, (BUFFER_SIZE / BUFFER_SIZE)))
 	{	
-		
-		if (buffer == '\n')
-			break;
+		a = 0;
+		while (buffer[i] != '\n' && buffer [i])
+		{
+			line = (char *)malloc(ft_strlen(buffer) + a + 1);
+			if (!line)
+				return (NULL);
+			line[a++] = buffer[i++];
+			if (line[a] != '\n')
+				free (line);
+			line [++a] = '\0';
+		}
 	}
-	printf("%s\n", buffer);
+	free (buffer);
+	return (line);
 }
 
 int main(){
