@@ -3,36 +3,36 @@
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[1];
+	static char	*buffer;
 	char	*line;
-	int	i;
-	int	a;
-
+//	char	*next_line;
+//	int	flag;
+//
+//	flag = 0;
+	buffer = NULL;
+	line = NULL;
 	if (read (fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	i = 0;
-	line = NULL;
-	while(read(fd, buffer, (BUFFER_SIZE / BUFFER_SIZE)))
-	{	
-		a = 0;
-		while (buffer[i] != '\n' && buffer [i])
-		{
-			line = (char *)malloc(ft_strlen(buffer) + a + 1);
-			if (!line)
-				return (NULL);
-			line[a++] = buffer[i++];
-			if (line[a] != '\n')
-				free (line);
-			line [++a] = '\0';
-		}
+	printf("1");
+	while (read(fd, buffer, BUFFER_SIZE) && *buffer != '\n')
+	{
+		printf("2");
+		line = ft_strjoin(line, buffer);
+//		if (flag != 0)
+//			break;
 	}
-	free (buffer);
 	return (line);
 }
 
-int main(){
+int	main()
+{
+	printf("2");
 	int fd = open("teste", O_RDONLY);
-	get_next_line(fd);
-	get_next_line(fd);
-	get_next_line(fd);
+	printf("2");
+	char *line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	// printf("2");
+	// //get_next_line(fd);
+	// //get_next_line(fd);
 }
