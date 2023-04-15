@@ -15,8 +15,6 @@ char	*ft_strjoin(char *line, char *buffer)
 	while (buffer[k] && buffer[k] != '\n')
 		prov[i++] = buffer[k++];
 	prov[i] = '\0';
-//	if (prov[i] - 1 == '\n')
-//		flag++;
 	if (line)
 		free (line);
 	return (prov);
@@ -31,4 +29,16 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
-//  && str[i] != '\n'
+
+int	check_new_line(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str && str[++i])
+	{
+		if (str[i] == '\n')
+			return (1);
+	}
+	return (0);
+}
