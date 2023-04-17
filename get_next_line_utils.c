@@ -15,9 +15,16 @@ char	*ft_strjoin(char *line, char *buffer)
 		return (NULL);
 	while (line && line[k])
 		prov[i++] = line[k++];
-	while (buffer && buffer[j] != '\n')
+	//printf("6\n");
+	while (buffer[j])
+	{
 		prov[i++] = buffer[j++];
+		if (prov[i - 1] == '\n')
+			break;
+	//	printf("check\n");
+	}
 	prov[i] = '\0';
+	//printf("7\n");
 	if (line)
 		free (line);
 	return (prov);
@@ -47,4 +54,3 @@ int	check_new_line(char *str)
 	}
 	return (0);
 }
-// && str[i] != '\n'

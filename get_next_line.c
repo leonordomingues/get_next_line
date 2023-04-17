@@ -5,7 +5,7 @@ char    *get_next_line(int fd)
 {
     static char    buffer[BUFFER_SIZE];
     char    *line;
-    int        i;
+    int	i;
 
     line = NULL;
     if (read (fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
@@ -17,6 +17,7 @@ char    *get_next_line(int fd)
             break ;
     }
     return (line);
+    //printf("check\n");
 }
 
 int main()
@@ -25,7 +26,7 @@ int main()
     char *line = NULL;
     while ((line = get_next_line(fd)))
     {
-        printf("%s\n", line);
+        printf("%s", line);
         free(line);
     }
     close(fd);
