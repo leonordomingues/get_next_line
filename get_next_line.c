@@ -17,7 +17,6 @@ char    *get_next_line(int fd)
             break ;
     }
     return (line);
-    //printf("check\n");
 }
 
 int main()
