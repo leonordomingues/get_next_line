@@ -19,8 +19,8 @@ char	*ft_strjoin(char *line, char *buffer)
 	while (buffer[j])
 	{
 		prov[i++] = buffer[j++];
-		if (prov[i - 1] == '\n')
-			break;
+		/* if (prov[i - 1] == '\n')
+			break; */
 	//	printf("check\n");
 	}
 	prov[i] = '\0';
@@ -37,7 +37,7 @@ int	ft_strlen(char *str)
 	i = 0;
 	if (!str)
 		return 0;
-	while (str[i])
+	while (str[i] && str[i] != '\n')
 		i++;
 	return (i);
 }
