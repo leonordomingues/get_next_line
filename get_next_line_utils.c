@@ -10,17 +10,17 @@ char	*ft_strjoin(char *line, char *buffer)
 	i = 0;
 	j = 0;
 	k = 0;
-	prov = (char *)malloc(ft_strlen(line) + ft_strlen(buffer) + 1);
+	prov = (char *)malloc(ft_strlen(line) + ft_strlen(buffer) + 2);
 	if (!prov)
 		return (NULL);
 	while (line && line[k])
 		prov[i++] = line[k++];
 	//printf("6\n");
-	while (buffer[j])
+	while (buffer[j] && buffer[j] != '\n' && buffer)
 	{
 		prov[i++] = buffer[j++];
-		/* if (prov[i - 1] == '\n')
-			break; */
+		if (prov[i - 1] == '\n')
+			break;
 	//	printf("check\n");
 	}
 	prov[i] = '\0';
