@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lda-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/04 18:04:37 by lda-cunh          #+#    #+#             */
+/*   Updated: 2023/05/04 18:13:54 by lda-cunh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 // char	*ft_strjoin(char *line, char *buffer)
@@ -22,11 +34,10 @@
 // 		free (line);
 // 	return (prov);
 // }
-
 char	*ft_strjoin(char *line, char *buffer)
 {
 	char	*ret;
-	int	i;
+	int		i;
 
 	ret = (char *)malloc((ft_strlen(line) + ft_strlen(buffer)) + 1);
 	if (!ret)
@@ -60,23 +71,24 @@ int	ft_strlen(char *str)
 
 int	check_new_line(char *str)
 {
-    int flag = 0;
-    int i;
-	int j;
+	int	flag;
+	int	i;
+	int	j;
 
+	flag = 0;
 	i = 0;
 	j = 0;
-    while (str[i])
-    {
-        if (str[i] == '\n')
-        {
-            flag = 1;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+		{
+			flag = 1;
 			str[i++] = 0;
-            break;
-        }
+			break ;
+		}
 		str[i++] = 0;
-    }
-   	if (flag)
+	}
+	if (flag)
 	{
 		while (str[i])
 		{
