@@ -1,33 +1,49 @@
 #include "get_next_line.h"
 
+// char	*ft_strjoin(char *line, char *buffer)
+// {
+// 	char	*prov;
+// 	int	i;
+
+// 	i = -1;
+// 	prov = (char *)malloc(ft_strlen(line) + ft_strlen(buffer) + 1);
+// 	if (!prov)
+// 		return (NULL);
+// 	while (line && line[++i])
+// 		prov[i] = line[i];
+// 	while (*buffer)
+// 	{
+// 		prov[i++] = *buffer;
+// 		if (*buffer++ == '\n')
+// 			break;
+// 	}
+// 	prov[i] = '\0';
+// 	if (line)
+// 		free (line);
+// 	return (prov);
+// }
+
 char	*ft_strjoin(char *line, char *buffer)
 {
-	char	*prov;
+	char	*ret;
 	int	i;
-	int	j;
-	int	k;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	prov = (char *)malloc(ft_strlen(line) + ft_strlen(buffer) + 2);
-	if (!prov)
+	ret = (char *)malloc((ft_strlen(line) + ft_strlen(buffer)) + 1);
+	if (!ret)
 		return (NULL);
-	while (line && line[k])
-		prov[i++] = line[k++];
-	//printf("6\n");
-	while (buffer[j] && buffer[j] != '\n' && buffer)
+	i = -1;
+	while (line && line[++i])
+		ret[i] = line[i];
+	i += (!line);
+	free(line);
+	while (*buffer)
 	{
-		prov[i++] = buffer[j++];
-		if (prov[i - 1] == '\n')
-			break;
-	//	printf("check\n");
+		ret[i++] = *buffer;
+		if (*buffer++ == '\n')
+			break ;
 	}
-	prov[i] = '\0';
-	//printf("7\n");
-	if (line)
-		free (line);
-	return (prov);
+	ret[i] = '\0';
+	return (ret);
 }
 
 int	ft_strlen(char *str)
@@ -36,21 +52,37 @@ int	ft_strlen(char *str)
 
 	i = 0;
 	if (!str)
-		return 0;
+		return (0);
 	while (str[i] && str[i] != '\n')
 		i++;
-	return (i);
+	return (i + (str[i] == '\n'));
 }
 
 int	check_new_line(char *str)
 {
-	int	i;
+    int flag = 0;
+    int i;
+	int j;
 
-	i = -1;
-	while (str && str[++i])
+	i = 0;
+	j = 0;
+    while (str[i])
+    {
+        if (str[i] == '\n')
+        {
+            flag = 1;
+			str[i++] = 0;
+            break;
+        }
+		str[i++] = 0;
+    }
+   	if (flag)
 	{
-		if (str[i] == '\n')
-			return (1);
+		while (str[i])
+		{
+			str[j++] = str[i];
+			str[i++] = 0;
+		}
 	}
-	return (0);
+	return (flag);
 }

@@ -7,11 +7,15 @@ char    *get_next_line(int fd)
     char    *line;
     int	i;
 
-    buffer[BUFFER_SIZE] = 0;
+    i = 0;
     line = NULL;
     if (read (fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
+    {
+        while (buffer[i])
+            buffer[i++]= 0; 
         return (NULL);
-    while ((i = read(fd, buffer, BUFFER_SIZE)))
+    }
+    while (*buffer || read(fd, buffer, BUFFER_SIZE) > 0)
     {
         line = ft_strjoin(line, buffer);
         if (check_new_line(buffer))
@@ -20,16 +24,15 @@ char    *get_next_line(int fd)
     return (line);
 }
 
-int main()
-{
-    int fd = open("teste", O_RDONLY);
-    char *line = NULL;
-    while ((line = get_next_line(fd)))
-    {
-        printf("%s", line);
-        free(line);
-    }
-    close(fd);
-    return (0);
-}
-
+// int main()
+// {
+//      int fd = open("teste", O_RDONLY);
+//      char *line = NULL;
+//      while ((line = get_next_line(fd)))
+//      {
+//          printf("%s", line);
+//          free(line);
+//      }
+//      close(fd);
+//      return (0);
+// }
